@@ -112,26 +112,26 @@ const DashboardFilters: React.FC<DashboardFiltersProps> = ({
             <SelectItem value="all">All Stock Levels</SelectItem>
             <SelectItem value="low">Low Stock (≤10)</SelectItem>
             <SelectItem value="medium">Medium Stock (11-50)</SelectItem>
-            <SelectItem value="high">High Stock (>50)</SelectItem>
+            <SelectItem value="high">High Stock (&gt;50)</SelectItem>
           </SelectContent>
         </Select>
 
         {/* Price Range Filter */}
         {/* Stock Level Filter */}
-        <Select
-        value={filters.stockLevel || "all"}
-        onValueChange={(value) => onFilterChange('stockLevel', value)}
-        >
-        <SelectTrigger>
-            <SelectValue placeholder="Stock Level" />
-        </SelectTrigger>
-        <SelectContent>
-            <SelectItem value="all">All Stock Levels</SelectItem>
-            <SelectItem value="low">Low Stock (&le;10)</SelectItem>
-            <SelectItem value="medium">Medium Stock (11-50)</SelectItem>
-            <SelectItem value="high">High Stock (&gt;50)</SelectItem>
-        </SelectContent>
-        </Select>
+    <Select
+    value={filters.stockLevel || "all"}
+    onValueChange={(value) => onFilterChange('stockLevel', value)}
+    >
+    <SelectTrigger>
+        <SelectValue placeholder="Stock Level" />
+    </SelectTrigger>
+    <SelectContent>
+        <SelectItem value="all">All Stock Levels</SelectItem>
+        <SelectItem value="low">Low Stock (&le;10)</SelectItem>
+        <SelectItem value="medium">Medium Stock (11-50)</SelectItem>
+        <SelectItem value="high">High Stock (&gt;50)</SelectItem>
+    </SelectContent>
+    </Select>
       </div>
     </div>
   );
