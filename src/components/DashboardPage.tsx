@@ -263,11 +263,11 @@ const DashboardPage = () => {
     );
   }
 
-  const categories = [...new Set(
+  const categories = Array.from(new Set(
     storesData.flatMap(store => 
       store.products.map(product => product.categoryId)
     )
-  )].filter(Boolean);
+  )).filter(Boolean);
 
   return (
     <div className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
