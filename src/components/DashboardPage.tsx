@@ -5,6 +5,7 @@ import {
   CartesianGrid, Tooltip, Legend, ResponsiveContainer,
   PieChart, Pie, Cell, AreaChart, Area
 } from 'recharts';
+import { Loader } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { collection, getDocs, query } from 'firebase/firestore';
 import { useFirebase } from '@/context/FirebaseContext';
@@ -256,8 +257,9 @@ const DashboardPage = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
-        <div className="text-lg font-medium text-gray-600">
-          Loading dashboard data...
+        <div className="flex flex-col items-center space-y-2">
+          <Loader className="animate-spin text-gray-600 w-8 h-8" />
+          <p className="text-lg font-medium text-gray-600">Loading dashboard data...</p>
         </div>
       </div>
     );
