@@ -61,6 +61,10 @@ interface Product {
     priceRange: string;
   }
 
+  interface CategoryMap {
+    [key: string]: Product[];
+  }
+
 const DashboardPage = () => {
   const { db } = useFirebase();
   const [storesData, setStoresData] = useState<Store[]>([]);
@@ -190,7 +194,7 @@ const DashboardPage = () => {
         });
 
         // Update filtered categories
-        const filteredCategories = {};
+        const filteredCategories: CategoryMap = {};
         filtered.forEach(product => {
           const category = product.categoryId || 'uncategorized';
           if (!filteredCategories[category]) {
