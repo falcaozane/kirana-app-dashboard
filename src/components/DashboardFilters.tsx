@@ -8,15 +8,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { CalendarIcon, SlidersHorizontal } from "lucide-react";
-import { format } from "date-fns";
 
 // Define interfaces for the props
 interface Store {
@@ -35,10 +26,8 @@ interface DashboardFiltersProps {
   stores: Store[];
   categories: string[];
   filters: Filters;
-  onFilterChange: (filterType: string, value: string) => void;
+  onFilterChange: (filterType: keyof Filters, value: string) => void;
   onReset: () => void;
-  dateRange?: Date[];
-  onDateChange?: (dates: Date[]) => void;
 }
 
 const DashboardFilters: React.FC<DashboardFiltersProps> = ({ 
@@ -46,8 +35,6 @@ const DashboardFilters: React.FC<DashboardFiltersProps> = ({
   categories,
   onFilterChange,
   filters,
-  onDateChange,
-  dateRange,
   onReset
 }) => {
   return (
@@ -66,7 +53,7 @@ const DashboardFilters: React.FC<DashboardFiltersProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {/* Store Filter */}
         <Select
-          value={filters.store || "all"}
+          value={filters.store}
           onValueChange={(value) => onFilterChange('store', value)}
         >
           <SelectTrigger>
@@ -84,7 +71,7 @@ const DashboardFilters: React.FC<DashboardFiltersProps> = ({
 
         {/* Category Filter */}
         <Select
-          value={filters.category || "all"}
+          value={filters.category}
           onValueChange={(value) => onFilterChange('category', value)}
         >
           <SelectTrigger>
@@ -102,7 +89,7 @@ const DashboardFilters: React.FC<DashboardFiltersProps> = ({
 
         {/* Stock Level Filter */}
         <Select
-          value={filters.stockLevel || "all"}
+          value={filters.stockLevel}
           onValueChange={(value) => onFilterChange('stockLevel', value)}
         >
           <SelectTrigger>
@@ -110,28 +97,27 @@ const DashboardFilters: React.FC<DashboardFiltersProps> = ({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Stock Levels</SelectItem>
-            <SelectItem value="low">Low Stock (≤10)</SelectItem>
+            <SelectItem value="low">Low Stock (10 or less)</SelectItem>
             <SelectItem value="medium">Medium Stock (11-50)</SelectItem>
-            <SelectItem value="high">High Stock (&gt;50)</SelectItem>
+            <SelectItem value="high">High Stock (50+)</SelectItem>
           </SelectContent>
         </Select>
 
         {/* Price Range Filter */}
-        {/* Stock Level Filter */}
-    <Select
-    value={filters.stockLevel || "all"}
-    onValueChange={(value) => onFilterChange('stockLevel', value)}
-    >
-    <SelectTrigger>
-        <SelectValue placeholder="Stock Level" />
-    </SelectTrigger>
-    <SelectContent>
-        <SelectItem value="all">All Stock Levels</SelectItem>
-        <SelectItem value="low">Low Stock (&le;10)</SelectItem>
-        <SelectItem value="medium">Medium Stock (11-50)</SelectItem>
-        <SelectItem value="high">High Stock (&gt;50)</SelectItem>
-    </SelectContent>
-    </Select>
+        <Select
+          value={filters.priceRange}
+          onValueChange={(value) => onFilterChange('priceRange', value)}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Price Range" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Prices</SelectItem>
+            <SelectItem value="0-100">₹0 - ₹100</SelectItem>
+            <SelectItem value="101-500">₹101 - ₹500</SelectItem>
+            <SelectItem value="501+">₹501+</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );
