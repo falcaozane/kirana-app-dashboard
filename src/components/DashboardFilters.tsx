@@ -18,7 +18,30 @@ import { Calendar } from "@/components/ui/calendar";
 import { CalendarIcon, SlidersHorizontal } from "lucide-react";
 import { format } from "date-fns";
 
-const DashboardFilters = ({ 
+// Define interfaces for the props
+interface Store {
+  id: string;
+  storeName: string;
+}
+
+interface Filters {
+  store: string;
+  category: string;
+  stockLevel: string;
+  priceRange: string;
+}
+
+interface DashboardFiltersProps {
+  stores: Store[];
+  categories: string[];
+  filters: Filters;
+  onFilterChange: (filterType: string, value: string) => void;
+  onReset: () => void;
+  dateRange?: Date[];
+  onDateChange?: (dates: Date[]) => void;
+}
+
+const DashboardFilters: React.FC<DashboardFiltersProps> = ({ 
   stores, 
   categories,
   onFilterChange,
