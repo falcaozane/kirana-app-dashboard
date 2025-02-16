@@ -15,7 +15,7 @@ const Footer = () => {
             <div>
               <div className="flex items-center">
                 <Store className="h-8 w-8 text-indigo-600" />
-                <span className="ml-2 text-xl font-bold text-gray-900">Kirana</span>
+                <span className="ml-2 text-xl font-bold text-gray-900">Dukandaar</span>
               </div>
               <p className="mt-4 text-sm text-gray-600">
                 Empowering local stores with modern inventory management solutions.
@@ -45,7 +45,7 @@ const Footer = () => {
               </h3>
               <ul className="mt-4 space-y-2">
                 <li className="text-sm text-gray-500">
-                  Email: support@kirana.com
+                  Email: support@dukandaar.com
                 </li>
                 <li className="text-sm text-gray-500">
                   Phone: +91 123-456-7890
@@ -57,7 +57,7 @@ const Footer = () => {
           {/* Copyright */}
           <div className="mt-8 pt-8 border-t border-gray-200">
             <p className="text-sm text-gray-500 text-center">
-              © {currentYear} Kirana. All rights reserved.
+              © {currentYear} Dukandaar. All rights reserved.
             </p>
           </div>
         </div>

@@ -278,7 +278,7 @@ export default function Home() {
 
       {/* App Features Section */}
       <section className="py-20 bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-1">
           <motion.div 
             initial="initial"
             whileInView="animate"
