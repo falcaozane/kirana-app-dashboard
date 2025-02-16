@@ -141,30 +141,34 @@ const DashboardPage = () => {
       try {
         const storesQuery = query(collection(db, 'stores'));
         const storesSnapshot = await getDocs(storesQuery);
-        const stores = [];
-        let allProducts = [];
+        const stores: Store[] = [];
+        let allProducts: Product[] = [];
         
         for (const storeDoc of storesSnapshot.docs) {
-          const storeData = storeDoc.data();
-          const productsQuery = query(collection(db, `stores/${storeDoc.id}/stockproducts`));
-          const productsSnapshot = await getDocs(productsQuery);
-          const products = productsSnapshot.docs.map(doc => ({
+        const storeData = storeDoc.data();
+        const productsQuery = query(collection(db, `stores/${storeDoc.id}/stockproducts`));
+        const productsSnapshot = await getDocs(productsQuery);
+        const products: Product[] = productsSnapshot.docs.map(doc => ({
             ...doc.data(),
             id: doc.id,
             storeId: storeDoc.id,
-            storeName: storeData.storeName
-          }));
-          
-          allProducts = [...allProducts, ...products];
-          
-          stores.push({
+            storeName: storeData.storeName,
+            productName: doc.data().productName || '',
+            productPrice: doc.data().productPrice || 0,
+            stock: doc.data().stock || 0,
+            categoryId: doc.data().categoryId || ''
+        } as Product));
+        
+        allProducts = [...allProducts, ...products];
+        
+        stores.push({
             id: storeDoc.id,
-            ...storeData,
+            storeName: storeData.storeName,
             productCount: products.length,
             totalStock: products.reduce((sum, product) => sum + (product.stock || 0), 0),
             totalValue: products.reduce((sum, product) => sum + (product.productPrice * product.stock), 0),
             products
-          });
+        });
         }
         
         setStoresData(stores);
