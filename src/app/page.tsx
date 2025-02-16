@@ -337,7 +337,7 @@ export default function Home() {
             >
               <div className="relative w-[300px] h-[600px] mx-auto">
                 <Image 
-                  src="https://images.unsplash.com/photo-1611262588024-d12430b98920?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=600&q=80"
+                  src="/kirana-store.jpg"
                   alt="Mobile App"
                   fill
                   className="object-contain"
