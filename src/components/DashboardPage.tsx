@@ -16,17 +16,62 @@ const BAR_COLORS = {
   stock: '#22c55e'
 };
 
+// Add these interfaces at the top of the file
+interface Product {
+    id: string;
+    storeId: string;
+    storeName: string;
+    productName: string;
+    productPrice: number;
+    stock: number;
+    categoryId: string;
+  }
+  
+  interface Store {
+    id: string;
+    storeName: string;
+    productCount: number;
+    totalStock: number;
+    totalValue: number;
+    products: Product[];
+  }
+  
+  interface FilteredData {
+    stores: Store[];
+    products: {
+      category: string;
+      count: number;
+      totalValue: number;
+      averagePrice: number;
+    }[];
+    topProducts: Product[];
+    lowStockProducts: Product[];
+    totalMetrics: {
+      totalStores: number;
+      totalProducts: number;
+      totalStock: number;
+      totalValue: number;
+    };
+  }
+  
+  interface Filters {
+    store: string;
+    category: string;
+    stockLevel: string;
+    priceRange: string;
+  }
+
 const DashboardPage = () => {
   const { db } = useFirebase();
-  const [storesData, setStoresData] = useState([]);
+  const [storesData, setStoresData] = useState<Store[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<Filters>({
     store: 'all',
     category: 'all',
     stockLevel: 'all',
     priceRange: 'all',
   });
-  const [filteredData, setFilteredData] = useState({
+  const [filteredData, setFilteredData] = useState<FilteredData>({
     stores: [],
     products: [],
     topProducts: [],
@@ -40,7 +85,7 @@ const DashboardPage = () => {
   });
 
   // Function to apply filters
-  const applyFilters = (data) => {
+  const applyFilters = (data: Product[]): Product[] => {
     let filteredProducts = [...data];
 
     if (filters.store && filters.store !== 'all') {
@@ -183,7 +228,8 @@ const DashboardPage = () => {
     fetchData();
   }, [db, filters]);
 
-  const handleFilterChange = (filterType, value) => {
+  // Update handle functions with types
+    const handleFilterChange = (filterType: keyof Filters, value: string) => {
     setFilters(prev => ({
       ...prev,
       [filterType]: value
